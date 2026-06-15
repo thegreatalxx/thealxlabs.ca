@@ -1,48 +1,33 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer style={{
-      borderTop: '1px solid #1a1a1a',
-      padding: '48px 0',
-      marginTop: 'auto',
-    }}>
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: '0 32px',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        gap: '24px',
-      }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <Image src="/logo.png" alt="thealxlabs" width={24} height={24} style={{ objectFit: 'contain' }} />
-            <div style={{ fontSize: '14px', fontWeight: '600' }}>thealxlabs</div>
+    <footer className="border-t border-[var(--border)] mt-auto">
+      <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div className="flex items-center gap-3">
+          <span className="text-sm font-semibold">thealxlabs</span>
+          <span className="text-[13px] text-[var(--muted)]">Toronto, 2026</span>
+        </div>
+
+        <nav className="flex items-center gap-6">
+          <Link href="/projects" className="text-[13px] text-[var(--muted)] hover:text-white transition-colors">
+            Projects
           </Link>
-          <div style={{ fontSize: '13px', color: '#666' }}>Toronto, Ontario • 2026</div>
-        </div>
-        <nav style={{ display: 'flex', gap: '32px' }}>
-          <Link href="/projects" style={{ fontSize: '13px', color: '#666' }}>Projects</Link>
-          <Link href="/about" style={{ fontSize: '13px', color: '#666' }}>About</Link>
-          <Link href="/contact" style={{ fontSize: '13px', color: '#666' }}>Contact</Link>
+          <Link href="/about" className="text-[13px] text-[var(--muted)] hover:text-white transition-colors">
+            About
+          </Link>
+          <Link href="/contact" className="text-[13px] text-[var(--muted)] hover:text-white transition-colors">
+            Contact
+          </Link>
+          <a
+            href="https://github.com/thegreatalxx"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[13px] text-[var(--muted)] hover:text-white transition-colors"
+          >
+            GitHub
+          </a>
         </nav>
-        <div style={{ display: 'flex', gap: '16px' }}>
-          <a href="https://github.com/thegreatalxx" target="_blank" style={{ fontSize: '12px', color: '#666' }}>GH</a>
-          <a href="https://twitter.com/thealxlabs" target="_blank" style={{ fontSize: '12px', color: '#666' }}>X</a>
-        </div>
-      </div>
-      <div style={{
-        maxWidth: '1200px',
-        margin: '32px auto 0',
-        padding: '0 32px',
-        fontSize: '12px',
-        color: '#444',
-      }}>
-        © 2026 thealxlabs. Built with Next.js.
       </div>
     </footer>
   );
