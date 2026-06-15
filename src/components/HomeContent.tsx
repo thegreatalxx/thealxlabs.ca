@@ -1,14 +1,9 @@
-'use client';
+"use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
-import { ArrowRight, Code, Globe, Star, GitFork, Folder, Microscope, Sparkles, Rocket, Layers, Boxes, ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
-import { ScrollAnimation } from "./ScrollAnimation";
-import { AnimatedCounter } from "./AnimatedCounter";
-import { Typewriter } from "./Typewriter";
+import { ArrowRight } from "lucide-react";
 
 interface Repo {
   id: number;
@@ -24,217 +19,175 @@ interface Repo {
   fork: boolean;
 }
 
-export function HomeContent({ 
-  repos, 
-  totalStars, 
-  totalForks, 
-  languages, 
-  featured 
-}: { 
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="text-[11px] uppercase tracking-[0.15em] text-[var(--muted)] font-medium">
+      {children}
+    </span>
+  );
+}
+
+export function HomeContent({
+  repos,
+  featured,
+}: {
   repos: Repo[];
-  totalStars: number;
-  totalForks: number;
-  languages: string[];
   featured: Repo[];
 }) {
-  const services = [
-    { icon: Sparkles, title: 'AI Tools', desc: 'Integrations connecting Claude, GPT-4o, and Gemini to everyday services.' },
-    { icon: Code, title: 'Developer Utilities', desc: 'CLI tools, session managers, and productivity boosters.' },
-    { icon: Globe, title: 'Open Source', desc: 'Everything we build is free and open to the community.' },
-    { icon: Microscope, title: 'Experiments', desc: "We build weird stuff because it's cool." },
-  ];
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 }
-    }
-  };
-
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="min-h-screen flex flex-col" style={{ position: "relative", zIndex: 1 }}>
       <Header />
-      <div style={{ flex: 1, paddingTop: '64px' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 32px' }}>
-          
+      <main className="flex-1 pt-16">
+        <div className="max-w-6xl mx-auto px-6">
           {/* Hero */}
-          <section style={{ padding: '140px 0 120px', position: 'relative', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-            <div style={{ flex: 1, position: 'relative' }}>
-              <div style={{ position: 'absolute', top: '50%', right: 0, width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)', transform: 'translateY(-50%)', animation: 'float 8s ease-in-out infinite' }} />
-              <div style={{ fontSize: '13px', color: '#666', marginBottom: '24px', letterSpacing: '0.05em' }}>TORONTO, 2026</div>
-              <h1 style={{ fontSize: '80px', fontWeight: '600', marginBottom: '24px', lineHeight: 1.05, letterSpacing: '-0.03em' }}>
-                We build<br />
-                <span style={{ background: 'linear-gradient(270deg, #fff, #666, #fff)', backgroundSize: '400% 400%', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', animation: 'gradient 4s ease infinite' }}>
-                  <Typewriter words={["weird things", "AI tools", "experiments", "the future"]} />
-                </span>
-              </h1>
-              <p style={{ fontSize: '18px', color: '#666', maxWidth: '480px', lineHeight: 1.6, marginBottom: '40px' }}>
-                Software lab building AI tools, developer utilities, and open-source experiments.
-              </p>
-              <div style={{ display: 'flex', gap: '16px' }}>
-                <a href="https://github.com/thegreatalxx" target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '14px 20px', background: '#fff', color: '#000', fontWeight: '500', fontSize: '13px', transition: 'all 0.3s' }} className="hover-lift">
-                  GH
-                </a>
-                <Link href="/about" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '14px 20px', border: '1px solid #333', fontSize: '13px', transition: 'all 0.3s' }} className="hover-glow">
-                  About <ArrowRight size={14} />
-                </Link>
-              </div>
+          <section className="py-32 sm:py-40">
+            <div className="animate-fade-in">
+              <SectionLabel>Toronto, 2026</SectionLabel>
             </div>
-            <motion.div 
-              style={{ position: 'relative', width: '280px', height: '350px', marginTop: '60px', marginLeft: '-40px', flexShrink: 0 }}
-              whileHover={{ scale: 1.05, rotate: 2 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <Image src="/mascot.png" alt="Mascot" width={280} height={350} style={{ objectFit: 'contain', animation: 'float 6s ease-in-out infinite' }} />
-            </motion.div>
+            <h1 className="text-5xl sm:text-7xl font-semibold tracking-tight leading-[1.05] mt-6 animate-fade-in-delay-1">
+              We build software
+              <br />
+              that ships.
+            </h1>
+            <p className="text-lg text-[var(--muted)] max-w-xl mt-8 leading-relaxed animate-fade-in-delay-2">
+              AI tools, developer utilities, and open-source experiments
+              from a Toronto-based lab. Everything we make is free and open.
+            </p>
+            <div className="flex items-center gap-4 mt-10 animate-fade-in-delay-3">
+              <a
+                href="https://github.com/thegreatalxx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-black text-sm font-medium hover:bg-[#ddd] transition-colors"
+              >
+                GitHub
+              </a>
+              <Link
+                href="/projects"
+                className="inline-flex items-center gap-2 px-5 py-2.5 border border-[var(--border)] text-sm hover:bg-[#111] transition-colors"
+              >
+                View projects
+                <ArrowRight size={14} />
+              </Link>
+            </div>
           </section>
 
-          {/* Stats */}
-          <ScrollAnimation>
-            <section style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: '#1a1a1a', marginBottom: '120px', border: '1px solid #1a1a1a' }}>
-              <div style={{ background: '#000', padding: '40px' }} className="hover-lift">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                  <Folder size={16} color="#666" />
-                  <span style={{ fontSize: '12px', color: '#666', letterSpacing: '0.1em' }}>REPOSITORIES</span>
-                </div>
-                <div style={{ fontSize: '56px', fontWeight: '600', marginBottom: '4px', lineHeight: 1 }}>
-                  <AnimatedCounter value={repos.length} />
-                </div>
-                <div style={{ fontSize: '13px', color: '#666' }}>On GitHub</div>
+          {/* What we do */}
+          <section className="py-20 border-t border-[var(--border)]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+              <div>
+                <SectionLabel>What we do</SectionLabel>
+                <h2 className="text-2xl sm:text-3xl font-semibold mt-4 tracking-tight">
+                  Tools for the modern developer.
+                </h2>
               </div>
-              <div style={{ background: '#000', padding: '40px' }} className="hover-lift">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                  <Star size={16} color="#666" />
-                  <span style={{ fontSize: '12px', color: '#666', letterSpacing: '0.1em' }}>TOTAL STARS</span>
+              <div className="space-y-8">
+                <div>
+                  <h3 className="text-sm font-medium mb-2">AI Integrations</h3>
+                  <p className="text-sm text-[var(--muted)] leading-relaxed">
+                    Connecting Claude, GPT-4o, and Gemini to everyday services.
+                    We make AI useful, not just impressive.
+                  </p>
                 </div>
-                <div style={{ fontSize: '56px', fontWeight: '600', marginBottom: '4px', lineHeight: 1 }}>
-                  <AnimatedCounter value={totalStars} />
+                <div>
+                  <h3 className="text-sm font-medium mb-2">Developer Utilities</h3>
+                  <p className="text-sm text-[var(--muted)] leading-relaxed">
+                    CLI tools, session managers, and productivity boosters.
+                    Built because we needed them ourselves.
+                  </p>
                 </div>
-                <div style={{ fontSize: '13px', color: '#666' }}>Earned</div>
+                <div>
+                  <h3 className="text-sm font-medium mb-2">Open Source</h3>
+                  <p className="text-sm text-[var(--muted)] leading-relaxed">
+                    Everything is free and open. Fork it, break it, make it yours.
+                    That is how software should be.
+                  </p>
+                </div>
               </div>
-              <div style={{ background: '#000', padding: '40px' }} className="hover-lift">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                  <GitFork size={16} color="#666" />
-                  <span style={{ fontSize: '12px', color: '#666', letterSpacing: '0.1em' }}>TOTAL FORKS</span>
-                </div>
-                <div style={{ fontSize: '56px', fontWeight: '600', marginBottom: '4px', lineHeight: 1 }}>
-                  <AnimatedCounter value={totalForks} />
-                </div>
-                <div style={{ fontSize: '13px', color: '#666' }}>Across repos</div>
-              </div>
-            </section>
-          </ScrollAnimation>
+            </div>
+          </section>
 
-           {/* Repos */}
-          <ScrollAnimation>
-            <section style={{ marginBottom: '120px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
-                <h2 style={{ fontSize: '12px', color: '#666', letterSpacing: '0.1em' }}>RECENT PROJECTS</h2>
-                {repos.length > 0 && (
-                  <Link href="/projects" style={{ fontSize: '12px', color: '#666', display: 'flex', alignItems: 'center', gap: '6px', transition: 'all 0.2s' }} className="hover-glow">
-                    All projects <ArrowRight size={12} />
-                  </Link>
-                )}
-              </div>
-              {repos.length === 0 ? (
-                <div style={{ padding: '32px', border: '1px solid #1a1a1a', textAlign: 'center', color: '#666' }}>
-                  Unable to load repositories right now
+          {/* Featured Projects */}
+          {featured.length > 0 && (
+            <section className="py-20 border-t border-[var(--border)]">
+              <div className="flex items-end justify-between mb-10">
+                <div>
+                  <SectionLabel>Featured</SectionLabel>
+                  <h2 className="text-2xl sm:text-3xl font-semibold mt-4 tracking-tight">
+                    Recent projects.
+                  </h2>
                 </div>
-              ) : (
-                <motion.div 
-                  style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1px', background: '#1a1a1a', border: '1px solid #1a1a1a' }}
-                  variants={containerVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
+                <Link
+                  href="/projects"
+                  className="text-[13px] text-[var(--muted)] hover:text-white transition-colors inline-flex items-center gap-1"
                 >
-                  {featured.map((p) => (
-                    <motion.div key={p.name} variants={itemVariants}>
-                      <a href={p.html_url} target="_blank" style={{ background: '#000', padding: '32px', display: 'block', transition: 'all 0.3s' }} className="hover-lift">
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
-                          <span style={{ fontSize: '16px', fontWeight: '500' }}>{p.name}</span>
-                          {p.stargazers_count > 0 && (
-                            <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', color: '#666' }}>
-                              <Star size={12} /> {p.stargazers_count}
-                            </span>
-                          )}
-                        </div>
-                        <p style={{ fontSize: '14px', color: '#666', marginBottom: '16px', lineHeight: 1.5 }}>{p.description || 'No description'}</p>
-                        <div style={{ display: 'flex', gap: '12px', alignItems: 'center', fontSize: '12px', color: '#666' }}>
-                          <span style={{ textTransform: 'uppercase', letterSpacing: '0.05em' }}>{p.language || 'Code'}</span>
-                          <span style={{ color: '#333' }}>•</span>
-                          <span>Updated {new Date(p.updated_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
-                        </div>
-                      </a>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              )}
-            </section>
-          </ScrollAnimation>
-
-          {/* Services */}
-          <ScrollAnimation>
-            <section style={{ marginBottom: '120px' }}>
-              <h2 style={{ fontSize: '12px', color: '#666', marginBottom: '40px', letterSpacing: '0.1em' }}>WHAT WE DO</h2>
-              <motion.div 
-                style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1px', background: '#1a1a1a', border: '1px solid #1a1a1a' }}
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                {services.map((s) => {
-                  const Icon = s.icon;
-                  return (
-                    <motion.div key={s.title} variants={itemVariants}>
-                      <div style={{ background: '#000', padding: '40px' }} className="hover-lift">
-                        <Icon size={24} style={{ marginBottom: '24px', opacity: 0.6 }} />
-                        <div style={{ fontSize: '18px', fontWeight: '600', marginBottom: '12px' }}>{s.title}</div>
-                        <p style={{ fontSize: '14px', color: '#666', lineHeight: 1.6 }}>{s.desc}</p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
-            </section>
-          </ScrollAnimation>
-
-          {/* Languages */}
-          <ScrollAnimation>
-            <section style={{ marginBottom: '120px', padding: '32px', border: '1px solid #1a1a1a' }}>
-              <h2 style={{ fontSize: '12px', color: '#666', marginBottom: '24px', letterSpacing: '0.1em' }}>LANGUAGES</h2>
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                {languages.map((lang) => (
-                  <span key={lang} style={{ fontSize: '13px', padding: '10px 20px', border: '1px solid #1a1a1a', transition: 'all 0.2s' }} className="hover-glow">{lang}</span>
+                  All projects
+                  <ArrowRight size={12} />
+                </Link>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {featured.slice(0, 4).map((repo) => (
+                  <a
+                    key={repo.id}
+                    href={repo.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block border border-[var(--border)] bg-[var(--surface)] p-6 hover-subtle"
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <h3 className="text-base font-medium">{repo.name}</h3>
+                      {repo.stargazers_count > 0 && (
+                        <span className="text-[12px] text-[var(--muted)] shrink-0 ml-4">
+                          {repo.stargazers_count} stars
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-[13px] text-[var(--muted)] leading-relaxed mb-4">
+                      {repo.description || "No description"}
+                    </p>
+                    <div className="flex items-center gap-3 text-[12px] text-[var(--muted)]">
+                      {repo.language && (
+                        <>
+                          <span>{repo.language}</span>
+                          <span className="text-[#333]">/</span>
+                        </>
+                      )}
+                      <span>
+                        Updated{" "}
+                        {new Date(repo.updated_at).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </span>
+                    </div>
+                  </a>
                 ))}
               </div>
             </section>
-          </ScrollAnimation>
+          )}
 
           {/* CTA */}
-          <ScrollAnimation>
-            <section style={{ textAlign: 'center', padding: '100px 0', borderTop: '1px solid #1a1a1a' }}>
-              <h2 style={{ fontSize: '48px', fontWeight: '600', marginBottom: '16px' }}>Let's build something.</h2>
-              <p style={{ color: '#666', marginBottom: '32px', fontSize: '16px' }}>Have an idea? Want to collaborate?</p>
-              <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '16px 28px', border: '1px solid #fff', fontWeight: '500', fontSize: '14px', transition: 'all 0.3s' }} className="hover-lift">
-                Say hello <ArrowRight size={16} />
+          <section className="py-20 border-t border-[var(--border)]">
+            <div className="max-w-xl">
+              <SectionLabel>Get in touch</SectionLabel>
+              <h2 className="text-3xl sm:text-4xl font-semibold mt-4 tracking-tight">
+                Let us build something.
+              </h2>
+              <p className="text-[var(--muted)] mt-4 leading-relaxed">
+                Have an idea? Want to collaborate? We are always open to
+                interesting conversations.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 mt-8 px-5 py-2.5 border border-white text-sm font-medium hover:bg-white hover:text-black transition-colors"
+              >
+                Say hello
+                <ArrowRight size={14} />
               </Link>
-            </section>
-          </ScrollAnimation>
+            </div>
+          </section>
         </div>
-      </div>
+      </main>
       <Footer />
     </div>
   );
