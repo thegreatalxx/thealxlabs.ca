@@ -1,12 +1,25 @@
 @import "tailwindcss";
 
+/* TheAlxLabs brand tokens. Dark-first: terminal-first lab. */
 :root {
-  --bg: #000000;
-  --fg: #ffffff;
-  --muted: #888888;
-  --border: #181818;
-  --surface: #0a0a0a;
-  --accent: #ffffff;
+  --ground: #0F0F0E;
+  --surface: #161614;
+  --line: #2B2A26;
+  --text: #F2F0EA;
+  --text-muted: #A3A098;
+  --signal: #FF5B2E;
+  --signal-text: #FF7A55;
+  --on-signal: #0F0F0E;
+  --brand-orange: #FF5B2E;
+
+  /* Aliases kept for existing pages */
+  --bg: var(--ground);
+  --fg: var(--text);
+  --muted: var(--text-muted);
+  --border: var(--line);
+  --accent: var(--signal);
+
+  color-scheme: dark;
 }
 
 * {
@@ -20,12 +33,12 @@ html {
 }
 
 body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
+  background: var(--ground);
+  color: var(--text);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 a {
@@ -33,33 +46,33 @@ a {
   text-decoration: none;
 }
 
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+
 ::selection {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 91, 46, 0.3);
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 64px 64px;
-  pointer-events: none;
-  z-index: 0;
+.font-mono-brand {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-body::after {
-  content: '';
-  position: fixed;
-  top: -50%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1200px;
-  height: 800px;
-  background: radial-gradient(ellipse, rgba(255,255,255,0.03) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
+/* Prompt mark */
+.mark .chev { stroke: var(--text); }
+.mark .cur { fill: var(--brand-orange); }
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .blink .cur,
+  .cursor-blink {
+    animation: blink 1s steps(1) infinite;
+  }
 }
 
 @keyframes fade-in {
@@ -86,19 +99,29 @@ body::after {
   opacity: 0;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-fade-in-delay-1,
+  .animate-fade-in-delay-2,
+  .animate-fade-in-delay-3 {
+    animation: none;
+    opacity: 1;
+  }
+}
+
 .hover-subtle {
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .hover-subtle:hover {
-  background: #111;
+  background: var(--surface);
+  border-color: var(--text-muted);
 }
 
 .hover-lift {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .hover-lift:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
 }
