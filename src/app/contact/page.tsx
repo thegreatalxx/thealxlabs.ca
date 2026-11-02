@@ -55,7 +55,7 @@ export default function ContactPage() {
                   </div>
                   <ArrowRight
                     size={16}
-                    className="text-[var(--muted)] group-hover:text-white transition-colors"
+                    className="text-[var(--muted)] group-hover:text-[var(--fg)] transition-colors"
                   />
                 </a>
               ))}

@@ -109,7 +109,7 @@ export default function AboutPage() {
                   href={c.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 border border-[var(--border)] text-sm hover:bg-[#111] transition-colors"
+                  className="px-5 py-2.5 border border-[var(--border)] text-sm hover:bg-[var(--surface)] transition-colors"
                 >
                   {c.label}
                 </a>
