@@ -67,7 +67,13 @@ export function HomeContent() {
               </div>
               <pre className="font-mono-brand text-sm leading-[22px] px-4 pt-[18px] pb-[22px] overflow-x-auto">
                 <span className="text-[var(--signal-text)]">❯</span> ls{"\n"}
-                <span className="text-[var(--muted)] whitespace-pre-wrap">{listing.join("  ")}</span>
+                <span className="text-[var(--muted)] whitespace-normal">
+                  {listing.map((n) => (
+                    <span key={n} className="inline-block whitespace-nowrap mr-[2ch]">
+                      {n}
+                    </span>
+                  ))}
+                </span>
                 {"\n\n"}
                 <span className="text-[var(--signal-text)]">❯</span>{" "}
                 <span className="cursor-blink text-[var(--signal)]">▍</span>

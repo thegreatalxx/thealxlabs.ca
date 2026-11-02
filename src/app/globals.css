@@ -22,106 +22,106 @@
   color-scheme: dark;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* Base styles live in layers so Tailwind utilities can override them.
+   Unlayered CSS beats every utility in Tailwind v4. */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-html {
-  scroll-behavior: smooth;
-}
+  body {
+    background: var(--ground);
+    color: var(--text);
+    font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+  }
 
-body {
-  background: var(--ground);
-  color: var(--text);
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  line-height: 1.5;
-}
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
+  }
 
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid var(--signal);
-  outline-offset: 3px;
-}
-
-::selection {
-  background: rgba(255, 91, 46, 0.3);
-}
-
-.font-mono-brand {
-  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
-}
-
-/* Prompt mark */
-.mark .chev { stroke: var(--text); }
-.mark .cur { fill: var(--brand-orange); }
-
-@keyframes blink {
-  50% { opacity: 0; }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .blink .cur,
-  .cursor-blink {
-    animation: blink 1s steps(1) infinite;
+  ::selection {
+    background: rgba(255, 91, 46, 0.3);
   }
 }
 
-@keyframes fade-in {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+@layer components {
+  .font-mono-brand {
+    font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
 
-.animate-fade-in {
-  animation: fade-in 0.6s ease-out forwards;
-}
+  /* Prompt mark */
+  .mark .chev { stroke: var(--text); }
+  .mark .cur { fill: var(--brand-orange); }
 
-.animate-fade-in-delay-1 {
-  animation: fade-in 0.6s ease-out 0.1s forwards;
-  opacity: 0;
-}
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
 
-.animate-fade-in-delay-2 {
-  animation: fade-in 0.6s ease-out 0.2s forwards;
-  opacity: 0;
-}
+  @media (prefers-reduced-motion: no-preference) {
+    .blink .cur,
+    .cursor-blink {
+      animation: blink 1s steps(1) infinite;
+    }
+  }
 
-.animate-fade-in-delay-3 {
-  animation: fade-in 0.6s ease-out 0.3s forwards;
-  opacity: 0;
-}
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-@media (prefers-reduced-motion: reduce) {
-  .animate-fade-in,
-  .animate-fade-in-delay-1,
-  .animate-fade-in-delay-2,
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-delay-1 {
+    animation: fade-in 0.6s ease-out 0.1s forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-in-delay-2 {
+    animation: fade-in 0.6s ease-out 0.2s forwards;
+    opacity: 0;
+  }
+
   .animate-fade-in-delay-3 {
-    animation: none;
-    opacity: 1;
+    animation: fade-in 0.6s ease-out 0.3s forwards;
+    opacity: 0;
   }
-}
 
-.hover-subtle {
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in,
+    .animate-fade-in-delay-1,
+    .animate-fade-in-delay-2,
+    .animate-fade-in-delay-3 {
+      animation: none;
+      opacity: 1;
+    }
+  }
 
-.hover-subtle:hover {
-  background: var(--surface);
-  border-color: var(--text-muted);
-}
+  .hover-subtle {
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
 
-.hover-lift {
-  transition: transform 0.2s ease;
-}
+  .hover-subtle:hover {
+    background: var(--surface);
+    border-color: var(--text-muted);
+  }
 
-.hover-lift:hover {
-  transform: translateY(-2px);
+  .hover-lift {
+    transition: transform 0.2s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
 }
