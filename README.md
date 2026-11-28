@@ -45,9 +45,8 @@ Everything in the folder is published, including this README and `scripts/`. Tha
 
 ## Terminal version
 
-`middleware.ts` answers `/` for curl, wget, HTTPie and xh with the site as plain text. Browsers still get `index.html`. The text is written in that file, so when you change the projects or links in `index.html`, change them there too.
+`middleware.ts` answers `/` for curl, wget, HTTPie and xh with the site as plain text. Browsers still get `index.html`. The text is written in that file, so when you change the words, projects or links in `index.html`, change them there too.
 
-- **Email:** the address comes from a `CONTACT_EMAIL` environment variable rather than the code. In the Vercel project, open *Settings → Environment Variables*, add `CONTACT_EMAIL` for Production, then redeploy. Until it's set, the email line is left out.
 - **The `-L`:** Vercel always redirects plain http to https, so share `curl -L thealxlabs.ca` or `curl https://thealxlabs.ca`. Without `-L`, curl prints Vercel's redirect instead of the site.
 - **Cost:** every request to `/` runs the middleware, which counts toward Vercel's included middleware invocations. Nothing is logged or stored.
 
